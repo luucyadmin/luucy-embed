@@ -8,7 +8,7 @@ Connect to [your own plugin](https://github.com/luucyadmin) and exchange message
 Add `luucy-embed` as a npm dependency to your project - or include it form a CDN
 
 In this example, we will make an app that allows users to input a coordinate and move to the coordinate in luucy
-+ The plugin will report location changes to your webpage
+And the plugin will report location changes to your webpage
 ```
 <!doctype html>
 <html>
