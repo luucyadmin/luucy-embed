@@ -5,7 +5,9 @@ Connect to [your own plugin](https://github.com/luucyadmin) and exchange message
 ## Example Application
 ![](embed.png)
 
+> **Warning**
 > You'll need to allow 3rd party cookies to debug a embedded plugin.
+> This is not required after deploying your plugin :D
 
 Add `luucy-embed` as a npm dependency to your project - or include it form a CDN
 
