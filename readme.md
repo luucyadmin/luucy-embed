@@ -5,6 +5,8 @@ Connect to [your own plugin](https://github.com/luucyadmin) and exchange message
 ## Example Application
 ![](embed.png)
 
+> You'll need to allow 3rd party cookies to debug a embedded plugin.
+
 Add `luucy-embed` as a npm dependency to your project - or include it form a CDN
 
 In this example, we will make an app that allows users to input a coordinate and move to the coordinate in luucy
