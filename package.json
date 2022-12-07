@@ -1,6 +1,6 @@
 {
     "name": "luucy-embed",
-    "version": "1.0.3",
+    "version": "1.0.4",
     "description": "Embed Luucy into your webpage and connect to your plugin",
     "main": "index.js"
 }
