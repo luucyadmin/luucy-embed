@@ -1,5 +1,5 @@
 export class Luucy {
-    constructor(application, workspace, projectId, variantId, source = 'https://luucy.ch') {
+    constructor(application, workspace, projectId, variantId, source = 'https://app.luucy.ch') {
         this.application = application;
         this.workspace = workspace;
         this.projectId = projectId;
