@@ -1,6 +1,13 @@
 {
-    "name": "luucy-embed",
-    "version": "1.0.4",
-    "description": "Embed Luucy into your webpage and connect to your plugin",
-    "main": "index.js"
+  "name": "luucy-embed",
+  "version": "1.0.4",
+  "description": "Embed Luucy into your webpage and connect to your plugin",
+  "main": "index.js",
+  "scripts": {
+    "lint": "prettier . --check",
+    "lint:fix": "prettier . --write"
+  },
+  "devDependencies": {
+    "prettier": "3.3.3"
+  }
 }

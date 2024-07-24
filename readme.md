@@ -1,8 +1,10 @@
 # Luucy Embed
+
 Embed luucy into your webpage!
 Connect to [your own plugin](https://github.com/luucyadmin) and exchange messages between your plugin and your webpage.
 
 ## Example Application
+
 ![](embed.png)
 
 > **Warning**
@@ -13,17 +15,18 @@ Add `luucy-embed` as a npm dependency to your project - or include it form a CDN
 
 In this example, we will make an app that allows users to input a coordinate and move to the coordinate in luucy
 And the plugin will report location changes to your webpage
+
 ```
 <!doctype html>
 <html>
     <head>
         <style>
-        
+
             iframe {
                 width: 800px;
                 height: 800px;
             }
-        
+
         </style>
     </head>
 
@@ -56,25 +59,26 @@ And the plugin will report location changes to your webpage
                 button.textContent = 'Go to Coordinates';
 
                 // send the coordinates! you can pass anything JSON serializeable to your plugin
-                button.onclick = () => luucy.sendMessage({ 
-                    latitude: latitude.valueAsNumber, 
-                    longitude: longitude.valueAsNumber 
+                button.onclick = () => luucy.sendMessage({
+                    latitude: latitude.valueAsNumber,
+                    longitude: longitude.valueAsNumber
                 });
-        
+
                 document.body.appendChild(button);
             });
-        
+
             // wait for messages from your plugin
             luucy.onmessage = message => {
                 document.body.appendChild(document.createTextNode(message));
             };
-        
+
         </script>
     </body>
 </html>
 ```
 
 And now create a plugin (using the [CLI](https://github.com/luucyadmin/luucy-cli)) and add the following code
+
 ```
 // enable fullscreen mode
 // this will hide all the luucy ui stuff
