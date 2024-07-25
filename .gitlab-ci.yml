@@ -34,6 +34,21 @@ embed:lint:
   script:
     - npm run lint
 
+embed:test:
+  stage: test
+  dependencies:
+    - embed:setup
+  needs:
+    - embed:setup
+  script:
+    - npm run coverage
+  artifacts:
+    reports:
+      coverage_report:
+        coverage_format: cobertura
+        path: coverage/cobertura-coverage.xml
+      junit: junit.xml
+
 embed:build:
   stage: build
   dependencies:
@@ -41,6 +56,7 @@ embed:build:
   needs:
     - embed:setup
     - embed:lint
+    - embed:test
   script:
     - mkdir -p .npm
     - npm run build
