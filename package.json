@@ -1,9 +1,11 @@
 {
   "name": "luucy-embed",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "Embed Luucy into your webpage and connect to your plugin",
   "main": "index.js",
+  "types": "lib/luucy-embed.d.ts",
   "scripts": {
+    "build": "npm pack --pack-destination .npm",
     "lint": "prettier . --check",
     "lint:fix": "prettier . --write"
   },

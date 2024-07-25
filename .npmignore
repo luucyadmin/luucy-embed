@@ -1,3 +1,10 @@
-embed.png
-sample-plugin
-sample-app
+sample-next-app/
+sample-html-app/
+sample-luucy-plugin/
+.npm
+test/
+tsconfig.json
+vitest.config.ts
+.prettierrc
+.prettierignore
+.gitlab-ci.yml
