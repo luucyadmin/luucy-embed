@@ -1,7 +1,7 @@
 'use client';
 import { useState, useEffect } from 'react';
 
-import { Luucy } from 'luucy-embed/lib/index';
+import { Luucy } from 'luucy-embed';
 
 export type LuucyEmbedData = {
   source: string;

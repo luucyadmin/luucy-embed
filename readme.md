@@ -5,13 +5,13 @@ Connect to [your own plugin](https://github.com/luucyadmin/luucy-cli) and exchan
 
 ## React Component
 
-A react component rendering and managing the LUUCY embed can be found in [`../lib/react/luucy-embed.tsx`](../lib/react/luucy-embed.tsx).
+A react component rendering and managing the LUUCY embed can be found in [`./sample-next-app/app/components/luucy-embed/luucy-embed.tsx`](./sample-next-app/src/components/luucy-embed/luucy-embed.tsx).
 
 Example usage in Code:
 
 ```tsx
 import { useCallback } from 'react';
-import { LuucyEmbed, type LuucyEmbedData } from 'luucy-embed/lib/react';
+import { LuucyEmbed, type LuucyEmbedData } from 'luucy-embed';
 
 export const SampleEmbed = () => {
   const logMessage = useCallback((message: object) => {
@@ -59,3 +59,5 @@ You can directly [open](https://luucy.gitlab.io/sdk/luucy-embed/?source=https%3A
 ### Vanilla Javascript
 
 A full HTML + JS example is available in [`sample-html-app/`](./sample-html-app/).
+
+Deployed to [luucy.gitlab.io/sdk/luucy-embed/sample-html-app/](https://luucy.gitlab.io/sdk/luucy-embed/sample-html-app/).
