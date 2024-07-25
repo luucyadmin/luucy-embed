@@ -1,0 +1,29 @@
+{
+  "name": "sample-embed-plugin",
+  "displayName": "Sample Embed Plugin",
+  "icon": "icon.svg",
+  "author": "LUUCY AG",
+  "version": "1.0.0",
+  "scopes": [
+    "core",
+    "data",
+    "embed",
+    "map",
+    "map.location",
+    "ui"
+  ],
+  "scripts": {
+    "lint": "prettier . --check",
+    "lint:fix": "prettier . --write",
+    "build": "luucy build",
+    "dev": "luucy serve"
+  },
+  "dependencies": {
+    "luucy-types": "^10.24.11"
+  },
+  "devDependencies": {
+    "luucy-cli": "^6.5.0",
+    "prettier": "3.3.3",
+    "typescript": "^5.5.4"
+  }
+}

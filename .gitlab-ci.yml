@@ -1,7 +1,129 @@
-lint:
-  stage: test
+stages:
+  - .pre
+  - test
+  - build
+  - deploy
+
+variables:
+  WEB_PREFIX: sample-app
+  PLUGIN_PREFIX: sample-plugin
+
+default:
   image: node:latest
-  before_script:
-    - npm ci
+  cache:
+    key:
+      files:
+        - package-lock.json
+    paths:
+      - .npm/
+
+embed:setup:
+  stage: .pre
+  script:
+    - npm ci --cache .npm --prefer-offline
+  artifacts:
+    paths:
+      - node_modules
+
+embed:lint:
+  stage: test
+  dependencies:
+    - embed:setup
+  needs:
+    - embed:setup
   script:
     - npm run lint
+
+embed:build:
+  stage: build
+  dependencies:
+    - embed:setup
+  needs:
+    - embed:setup
+    - embed:lint
+  script:
+    - mkdir -p .npm
+    - npm pack --pack-destination .npm
+  artifacts:
+    paths:
+      - .npm
+
+web:setup:
+  stage: .pre
+  script:
+    - 'echo "Using Web directory: $WEB_PREFIX"'
+    - cd $WEB_PREFIX && npm ci --cache .npm --prefer-offline
+  artifacts:
+    paths:
+      - $WEB_PREFIX/node_modules
+
+web:lint:
+  stage: test
+  dependencies:
+    - web:setup
+  needs:
+    - web:setup
+  script:
+    - cd $WEB_PREFIX && npm run lint
+
+web:build:
+  stage: build
+  dependencies:
+    - web:setup
+  needs:
+    - web:setup
+    - web:lint
+  script:
+    - cd $WEB_PREFIX && npm run build
+  artifacts:
+    paths:
+      - $WEB_PREFIX/out
+
+pages:
+  stage: deploy
+  dependencies:
+    - web:build
+  needs:
+    - web:build
+  script:
+    - cd $WEB_PREFIX && rm -rf public && mkdir -p public
+    - cd $WEB_PREFIX && mv out/* ../public
+  artifacts:
+    paths:
+      - public
+  rules:
+    - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
+  environment:
+    name: prod
+    url: $CI_PAGES_URL
+
+plugin:setup:
+  stage: .pre
+  script:
+    - 'echo "Using Plugn directory: $PLUGIN_PREFIX"'
+    - cd $PLUGIN_PREFIX && npm ci --cache .npm --prefer-offline
+  artifacts:
+    paths:
+      - $PLUGIN_PREFIX/node_modules
+
+plugin:lint:
+  stage: test
+  dependencies:
+    - plugin:setup
+  needs:
+    - plugin:setup
+  script:
+    - cd $PLUGIN_PREFIX && npm run lint
+
+plugin:build:
+  stage: build
+  dependencies:
+    - plugin:setup
+  needs:
+    - plugin:setup
+    - plugin:lint
+  script:
+    - cd $PLUGIN_PREFIX && npm run build
+  artifacts:
+    paths:
+      - $PLUGIN_PREFIX/bundles
