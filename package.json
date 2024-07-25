@@ -7,9 +7,16 @@
   "scripts": {
     "build": "npm pack --pack-destination .npm",
     "lint": "prettier . --check",
-    "lint:fix": "prettier . --write"
+    "lint:fix": "prettier . --write",
+    "test": "vitest",
+    "coverage": "vitest run --coverage"
   },
   "devDependencies": {
-    "prettier": "3.3.3"
+    "@testing-library/dom": "^10.4.0",
+    "@vitest/coverage-istanbul": "^2.0.4",
+    "global-jsdom": "^24.0.0",
+    "jsdom": "^24.1.1",
+    "prettier": "3.3.3",
+    "vitest": "^2.0.4"
   }
 }
