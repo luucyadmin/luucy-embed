@@ -12,7 +12,7 @@ type LogMessage = {
 export default function Home() {
   const searchParams = useSearchParams();
   const [formData] = useState({
-    source: searchParams.get('sources') ?? '',
+    source: searchParams.get('source') ?? '',
     workspaceUrl: searchParams.get('workspaceUrl') ?? 'LUUCY_Testing_LUUCY_Embed_Sample',
     projectId: searchParams.get('projectId') ?? '10273',
     variantId: searchParams.get('variantId') ?? '33419',
