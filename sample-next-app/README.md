@@ -20,7 +20,7 @@ This is an example [`next.js`](https://nextjs.org/docs) application embedding [L
   Example LUUCY URL: https://app.luucy.ch/LUUCY_Testing_LUUCY_Embed_Sample/projects/**10273**/33419
 1. *Optional*: Set a VariantId
   Example LUUCY URL: https://app.luucy.ch/LUUCY_Testing_LUUCY_Embed_Sample/projects/10273/**33419**
-1. *Optional*: Set a plugin name, defaults to `sample-embed-plugin` (as set in [`sample-plugin`](../sample-plugin/))
+1. *Optional*: Set a plugin name, defaults to `sample-embed-plugin` (as set in [`sample-luucy-plugin`](../sample-luucy-plugin/))
 1. Click "open"
 
 ### How to log out
