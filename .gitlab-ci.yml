@@ -5,8 +5,8 @@ stages:
   - deploy
 
 variables:
-  WEB_PREFIX: sample-app
-  PLUGIN_PREFIX: sample-plugin
+  WEB_PREFIX: sample-next-app
+  PLUGIN_PREFIX: sample-luucy-plugin
 
 default:
   image: node:latest
@@ -43,7 +43,7 @@ embed:build:
     - embed:lint
   script:
     - mkdir -p .npm
-    - npm pack --pack-destination .npm
+    - npm run build
   artifacts:
     paths:
       - .npm
@@ -89,7 +89,9 @@ pages:mr:
     - web:build
   script:
     - echo 'Dry run for pages deployment'
-    - cd $WEB_PREFIX && rm -rf ../public && mkdir -p ../public && mv out/* ../public
+    - cd $CI_PROJECT_DIR && rm -rf public
+    - cd $CI_PROJECT_DIR/$WEB_PREFIX && mkdir -p ../public && mv out/* ../public
+    - cd $CI_PROJECT_DIR && mkdir -p public/sample-html-app && mv sample-html-app/* public/sample-html-app
   artifacts:
     paths:
       - public
@@ -103,7 +105,9 @@ pages:
   needs:
     - web:build
   script:
-    - cd $WEB_PREFIX && rm -rf ../public && mkdir -p ../public && mv out/* ../public
+    - cd $CI_PROJECT_DIR && rm -rf public
+    - cd $CI_PROJECT_DIR/$WEB_PREFIX && mkdir -p ../public && mv out/* ../public
+    - cd $CI_PROJECT_DIR && mkdir -p public/sample-html-app && mv sample-html-app/* public/sample-html-app
   artifacts:
     paths:
       - public
