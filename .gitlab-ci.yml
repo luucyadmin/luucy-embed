@@ -86,7 +86,7 @@ pages:
   needs:
     - web:build
   script:
-    - cd $WEB_PREFIX && rm -rf public && mkdir -p public && mv out/* ../public
+    - cd $WEB_PREFIX && rm -rf ../public && mkdir -p ../public && mv out/* ../public
   artifacts:
     paths:
       - public
