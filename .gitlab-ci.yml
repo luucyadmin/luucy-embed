@@ -73,11 +73,28 @@ web:build:
   needs:
     - web:setup
     - web:lint
+  variables:
+    NEXT_PUBLIC_PUBLIC_URL: $CI_PAGES_URL
   script:
     - cd $WEB_PREFIX && npm run build
   artifacts:
     paths:
       - $WEB_PREFIX/out
+
+pages:mr:
+  stage: deploy
+  dependencies:
+    - web:build
+  needs:
+    - web:build
+  script:
+    - echo 'Dry run for pages deployment'
+    - cd $WEB_PREFIX && rm -rf ../public && mkdir -p ../public && mv out/* ../public
+  artifacts:
+    paths:
+      - public
+  rules:
+    - if: $CI_COMMIT_BRANCH && $CI_COMMIT_BRANCH != $CI_DEFAULT_BRANCH
 
 pages:
   stage: deploy
