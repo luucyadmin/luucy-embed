@@ -1,0 +1,46 @@
+html,
+body {
+  padding: 0;
+  margin: 0;
+  font-family:
+    -apple-system,
+    BlinkMacSystemFont,
+    Segoe UI,
+    Roboto,
+    Oxygen,
+    Ubuntu,
+    Cantarell,
+    Fira Sans,
+    Droid Sans,
+    Helvetica Neue,
+    sans-serif;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+* {
+  box-sizing: border-box;
+}
+iframe {
+  width: 800px;
+  height: 800px;
+  border: 1px solid red;
+  margin: 10px;
+}
+.flex {
+  display: flex;
+}
+.logView {
+  width: 100%;
+}
+.logView p {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+.messageLog {
+  font-family: monospace;
+  font-size: 12px;
+}
