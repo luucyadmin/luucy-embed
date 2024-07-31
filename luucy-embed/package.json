@@ -1,22 +1,29 @@
 {
   "name": "luucy-embed",
-  "version": "1.0.5",
+  "version": "1.0.6-rc.1",
   "description": "Embed Luucy into your webpage and connect to your plugin",
-  "main": "index.js",
-  "types": "lib/luucy-embed.d.ts",
+  "main": "dist/main.min.cjs.js",
+  "module": "dist/main.min.esm.js",
+  "browser": "dist/main.min.umd.js",
+  "types": "dist/luucy-embed.d.ts",
   "scripts": {
-    "build": "npm pack --pack-destination .npm",
+    "build": "rollup -c --bundleConfigAsCjs",
+    "dev": "rollup -c --bundleConfigAsCjs -w",
     "lint": "prettier . --check",
     "lint:fix": "prettier . --write",
     "test": "vitest",
     "coverage": "vitest run --coverage"
   },
   "devDependencies": {
+    "@rollup/plugin-commonjs": "^26.0.1",
+    "@rollup/plugin-node-resolve": "^15.2.3",
+    "@rollup/plugin-terser": "^0.4.4",
     "@testing-library/dom": "^10.4.0",
     "@vitest/coverage-istanbul": "^2.0.4",
     "global-jsdom": "^24.0.0",
     "jsdom": "^24.1.1",
     "prettier": "3.3.3",
+    "rollup-plugin-dts": "^6.1.1",
     "vitest": "^2.0.4"
   }
 }

@@ -2,9 +2,13 @@ sample-next-app/
 sample-html-app/
 sample-luucy-plugin/
 .npm
+src/
 test/
 tsconfig.json
 vitest.config.ts
 .prettierrc
 .prettierignore
 .gitlab-ci.yml
+coverage/
+junit.xml
+*.config.*

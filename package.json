@@ -1,0 +1,9 @@
+{
+  "name": "luucy-embed-prj",
+  "version": "1.0.0",
+  "workspaces": [
+    "luucy-embed",
+    "sample-luucy-plugin",
+    "sample-next-app"
+  ]
+}
