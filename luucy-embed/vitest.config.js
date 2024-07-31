@@ -5,7 +5,7 @@ export default defineConfig({
     environment: 'jsdom',
     coverage: {
       provider: 'istanbul',
-      include: ['index.js', 'lib/**/*.js'],
+      include: ['src/**/*.js'],
       reporter: ['text', 'html', 'cobertura']
     },
     reporters: ['default', 'junit'],

@@ -4,7 +4,6 @@ export class Luucy {
     this.workspace = workspace;
     this.projectId = projectId;
     this.variantId = variantId;
-
     this.source = source;
   }
 

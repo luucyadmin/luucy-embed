@@ -1,6 +1,6 @@
 import { expect, describe, it } from 'vitest';
 import { getByRole } from '@testing-library/dom';
-import { Luucy } from '../index';
+import { Luucy } from '../src/main';
 
 describe('Luucy', () => {
   it('can construct Luucy with application, workspace, projectId', () => {

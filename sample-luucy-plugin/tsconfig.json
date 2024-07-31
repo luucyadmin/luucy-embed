@@ -9,7 +9,7 @@
     "noEmitHelpers": true,
     "module": "AMD",
     "moduleResolution": "classic",
-    "typeRoots": [".luucy"]
+    "typeRoots": ["../.luucy"]
   },
-  "include": ["**/*.ts", "plugin.ts", ".luucy/types.d.ts"]
+  "include": ["**/*.ts", "plugin.ts", "../.luucy/types.d.ts"]
 }

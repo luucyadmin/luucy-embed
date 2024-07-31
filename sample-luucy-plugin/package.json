@@ -1,6 +1,6 @@
 {
-  "name": "sample-embed-plugin",
-  "displayName": "Sample Embed Plugin",
+  "name": "sample-luucy-plugin",
+  "displayName": "Sample Embed LUUCY Plugin",
   "icon": "icon.svg",
   "author": "LUUCY AG",
   "version": "1.0.0",
@@ -13,7 +13,7 @@
     "ui"
   ],
   "scripts": {
-    "lint": "prettier . --check",
+    "lint": "prettier . --check --log-level debug",
     "lint:fix": "prettier . --write",
     "build": "luucy build",
     "dev": "luucy serve"

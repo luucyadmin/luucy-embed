@@ -18,31 +18,32 @@ default:
     paths:
       - .npm/
 
-embed:setup:
+setup:
   stage: .pre
   script:
-    - cd $CI_PROJECT_DIR/$PKG_PREFIX && npm ci --cache .npm --prefer-offline
+    - npm ci --cache .npm --prefer-offline
   artifacts:
     paths:
-      - $PKG_PREFIX/node_modules
+      - node_modules
+      - "**/node_modules"
 
-embed:lint:
+lint:
   stage: test
   dependencies:
-    - embed:setup
+    - setup
   needs:
-    - embed:setup
+    - setup
   script:
-    - cd $CI_PROJECT_DIR/$PKG_PREFIX && npm run lint
+    - npm run lint --workspaces --if-present
 
-embed:test:
+test:
   stage: test
   dependencies:
-    - embed:setup
+    - setup
   needs:
-    - embed:setup
+    - setup
   script:
-    - cd $CI_PROJECT_DIR/$PKG_PREFIX && npm run coverage
+    - npm run coverage --workspaces --if-present
   artifacts:
     reports:
       coverage_report:
@@ -50,60 +51,39 @@ embed:test:
         path: $PKG_PREFIX/coverage/cobertura-coverage.xml
       junit: $PKG_PREFIX/junit.xml
 
-embed:build:
+build:
   stage: build
   dependencies:
-    - embed:setup
+    - setup
   needs:
-    - embed:setup
-    - embed:lint
-    - embed:test
+    - setup
+    - lint
+    - test
   script:
-    - cd $CI_PROJECT_DIR/$PKG_PREFIX && mkdir -p .npm
-    - cd $CI_PROJECT_DIR/$PKG_PREFIX && npm run build
+    - npm run build --workspaces --if-present
   artifacts:
     paths:
-      - .npm
-
-web:setup:
-  stage: .pre
-  script:
-    - 'echo "Using Web directory: $WEB_PREFIX"'
-    - cd $CI_PROJECT_DIR/$WEB_PREFIX && npm ci --cache .npm --prefer-offline
-  artifacts:
-    paths:
-      - $WEB_PREFIX/node_modules
-
-web:lint:
-  stage: test
-  dependencies:
-    - web:setup
-  needs:
-    - web:setup
-  script:
-    - cd $CI_PROJECT_DIR/$WEB_PREFIX && npm run lint
-
-web:build:
-  stage: build
-  dependencies:
-    - web:setup
-  needs:
-    - web:setup
-    - web:lint
-  variables:
-    NEXT_PUBLIC_PUBLIC_URL: $CI_PAGES_URL
-  script:
-    - cd $CI_PROJECT_DIR/$WEB_PREFIX && npm run build
-  artifacts:
-    paths:
+      - $PKG_PREFIX/dist
       - $WEB_PREFIX/out
+      - $PLUGIN_PREFIX/bundles
+
+embed:deploy-mr:
+  stage: deploy
+  dependencies:
+    - build
+  needs:
+    - build
+  script:
+    - npm publish --dry-run -w $PKG_PREFIX
+  rules:
+    - if: $CI_COMMIT_BRANCH && $CI_COMMIT_BRANCH != $CI_DEFAULT_BRANCH
 
 pages:mr:
   stage: deploy
   dependencies:
-    - web:build
+    - build
   needs:
-    - web:build
+    - build
   script:
     - echo 'Dry run for pages deployment'
     - cd $CI_PROJECT_DIR && rm -rf public
@@ -118,9 +98,9 @@ pages:mr:
 pages:
   stage: deploy
   dependencies:
-    - web:build
+    - build
   needs:
-    - web:build
+    - build
   script:
     - cd $CI_PROJECT_DIR && rm -rf public
     - cd $CI_PROJECT_DIR/$WEB_PREFIX && mkdir -p ../public && mv out/* ../public
@@ -133,34 +113,3 @@ pages:
   environment:
     name: prod
     url: $CI_PAGES_URL
-
-plugin:setup:
-  stage: .pre
-  script:
-    - 'echo "Using Plugn directory: $PLUGIN_PREFIX"'
-    - cd $CI_PROJECT_DIR/$PLUGIN_PREFIX && npm ci --cache .npm --prefer-offline
-  artifacts:
-    paths:
-      - $PLUGIN_PREFIX/node_modules
-
-plugin:lint:
-  stage: test
-  dependencies:
-    - plugin:setup
-  needs:
-    - plugin:setup
-  script:
-    - cd $CI_PROJECT_DIR/$PLUGIN_PREFIX && npm run lint
-
-plugin:build:
-  stage: build
-  dependencies:
-    - plugin:setup
-  needs:
-    - plugin:setup
-    - plugin:lint
-  script:
-    - cd $CI_PROJECT_DIR/$PLUGIN_PREFIX && npm run build
-  artifacts:
-    paths:
-      - $PLUGIN_PREFIX/bundles
