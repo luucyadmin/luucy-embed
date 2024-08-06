@@ -59,6 +59,8 @@ build:
     - setup
     - lint
     - test
+  variables:
+    NEXT_PUBLIC_PUBLIC_URL: $CI_PAGES_URL
   script:
     - npm run build --workspaces --if-present
   artifacts:
