@@ -1,0 +1,21 @@
+name: Mirror Repository from GitLab
+
+on:
+  schedule:
+    - cron: '0 * * * *'  # Runs every hour
+  workflow_dispatch:  # Allows manual trigger
+
+jobs:
+  mirror:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Clone GitLab repository
+        run: git clone --bare https://${{ secrets.GITLAB_USER }}:${{ secrets.GITLAB_TOKEN }}@gitlab.zensys.cz/sdk-and-apps/apps/luucy-embed.git repo.git
+        
+      - name: Push to GitHub
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          cd repo.git
+          git remote set-url --push origin https://x-access-token:${GITHUB_TOKEN}@github.com/luucyadmin/luucy-embed.git
+          git push --mirror
